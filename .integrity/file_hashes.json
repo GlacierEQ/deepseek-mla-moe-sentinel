@@ -1,0 +1,16 @@
+{
+  "repo": "deepseek-mla-moe-sentinel",
+  "algorithm": "sha256",
+  "file_count": 9,
+  "hashes": {
+    "README.md": "66c4d2ff1eff10bfa06b38d084faa6b76a63af4b3898aea90e5455d461f05294",
+    "AKOS.md": "78960f5756f5bae47a7a067a601c15a526132a606f5681fb839b6899f7646f4f",
+    "AGENTS.md": "b72e8b09a7ccea1bd071bfee37c55e059e6221c03249f925937dde4d549a1a9b",
+    "HELIX_STRAND.md": "7acc0f7a42e08440c4ee21c4f99db7744ccf9a8ea4ee8990c8f87ed55b156b31",
+    "mastermind_sidecar.py": "48365d7dd3eed0b5682d3ccb30384a282ad7380cb3cf96763ef37179b8d929b8",
+    "SECURITY_AND_FLEET_OPS.md": "26141c0f07d95847d679de423ddb7bdee6f3e319d204383c89a58d6d3bb610c7",
+    "HELIX.md": "28537819230e8471dcec1bf66079895da3d8b05ee7e8135557b830284c9688fe",
+    "tests/test_deepseek.py": "a6f38a7ca0cc7c6eb54fd86f1258fd052e329845e72e51789ea283d3de5104ce",
+    "src/deepseek_mla_moe_sentinel.py": "be2a449af929bd14b6ffd2c88449dea9fc889748c9f480c840c2823ead86a969"
+  }
+}
