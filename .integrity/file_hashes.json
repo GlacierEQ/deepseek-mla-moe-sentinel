@@ -1,5 +1,5 @@
 {
-  "file_count": 11,
+  "file_count": 12,
   "hashes": {
     "AGENTS.md": "b72e8b09a7ccea1bd071bfee37c55e059e6221c03249f925937dde4d549a1a9b",
     "AKOS.md": "78960f5756f5bae47a7a067a601c15a526132a606f5681fb839b6899f7646f4f",
@@ -10,6 +10,7 @@
     "mastermind_sidecar.py": "48365d7dd3eed0b5682d3ccb30384a282ad7380cb3cf96763ef37179b8d929b8",
     "src/deepseek_mla_moe_sentinel.py": "be2a449af929bd14b6ffd2c88449dea9fc889748c9f480c840c2823ead86a969",
     "src/mla_compression.c": "cd0f2ed405dc631865084c7f1a8087e5f29137c64c0b8b29386841adde48aac5",
+    "src/mla_moe_solver.c": "b7575bfa8f7e136d768645f52ccf567a9b97f9d176056e9c39ab30cdb89ee1ca",
     "tests/test_deepseek.py": "a6f38a7ca0cc7c6eb54fd86f1258fd052e329845e72e51789ea283d3de5104ce",
     "tests/test_mla.py": "3dc6b87233a3595f1920a425a9c53cd9856da0dbbb2dc0a625573b1967611c3c"
   }
