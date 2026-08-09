@@ -46,5 +46,6 @@ jobs:
           gcc -std=c11 -Wall -Wextra -c src/mla_moe_solver.c -o /tmp/mla_moe_solver.o
       - name: Verify public truth boundary
         run: |
+          grep -q 'MODELED_MLA_MOE_SCENARIO_NOT_MODEL_EXECUTION' src/deepseek_mla_moe_sentinel.py
           grep -q 'MODELED_MLA_MOE_SCENARIO_NOT_MODEL_EXECUTION' README.md
           grep -q 'not affiliated with, endorsed by, or operated by DeepSeek' README.md
