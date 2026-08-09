@@ -7,7 +7,6 @@ expert-selection ratios from explicit dimensions so those assumptions are testab
 
 from __future__ import annotations
 
-import time
 from typing import Any
 
 EVIDENCE_STATE = "MODELED_MLA_MOE_SCENARIO_NOT_MODEL_EXECUTION"
@@ -35,17 +34,17 @@ class DeepSeekMLAMoESentinel:
     ) -> dict[str, Any]:
         """Return modeled FP16 KV-storage and expert-activation ratios."""
 
-        if tokens_count < 1:
-            raise ValueError("tokens_count must be positive")
+        if type(tokens_count) is not int or tokens_count < 1:
+            raise ValueError("tokens_count must be an integer >= 1")
+        if type(active_experts) is not int:
+            raise ValueError("active_experts must be an integer")
         if active_experts < 1 or active_experts > self.total_experts:
             raise ValueError("active_experts must be within total_experts")
 
-        started = time.perf_counter()
         raw_kv_bytes = tokens_count * self.hidden_dim * 2 * 2  # FP16 K + V.
         latent_bytes = tokens_count * self.latent_dim * 2  # One FP16 latent vector.
         memory_saved_pct = (1.0 - latent_bytes / raw_kv_bytes) * 100.0
         expert_utilization_pct = active_experts / self.total_experts * 100.0
-        elapsed_ms = (time.perf_counter() - started) * 1000.0
 
         return {
             "tokens_count": tokens_count,
@@ -58,7 +57,6 @@ class DeepSeekMLAMoESentinel:
             "total_experts": self.total_experts,
             "expert_activation_percent": round(expert_utilization_pct, 2),
             "evidence_state": EVIDENCE_STATE,
-            "elapsed_local_arithmetic_ms": round(elapsed_ms, 6),
         }
 
     def optimize_mla_moe(
