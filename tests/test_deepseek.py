@@ -1,7 +1,7 @@
 """Regression tests for the deterministic MLA/MoE architecture model."""
 import unittest
 
-from deepseek_mla_moe_sentinel import EVIDENCE_STATE, DeepSeekMLAMoESentinel
+from deepseek_mla_moe_sentinel import DeepSeekMLAMoESentinel
 
 
 class TestMLAMoEArchitectureModel(unittest.TestCase):
@@ -11,7 +11,10 @@ class TestMLAMoEArchitectureModel(unittest.TestCase):
 
         self.assertGreater(result["modeled_storage_reduction_percent"], 90.0)
         self.assertEqual(result["expert_activation_percent"], 3.12)
-        self.assertEqual(result["evidence_state"], EVIDENCE_STATE)
+        self.assertEqual(
+            result["evidence_state"],
+            "MODELED_MLA_MOE_SCENARIO_NOT_MODEL_EXECUTION",
+        )
         self.assertNotIn("answer", result)
         self.assertNotIn("status", result)
 
