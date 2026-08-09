@@ -1,47 +1,67 @@
-"""
-DeepSeek MLA MoE Sentinel — Production Solution for DeepSeek V3/R1 Multi-Head Latent Attention & MoE Routing
+"""Deterministic MLA/MoE architecture arithmetic inspired by public design patterns.
 
-Addresses DeepSeek V3/R1 Multi-Head Latent Attention (MLA) compression & auxiliary-loss-free MoE load balancing.
-Key Innovations:
-  1. Latent KV Compressor: Compresses key-value states into low-rank latent vectors, saving 93.3% of KV-cache memory.
-  2. Auxiliary-Loss-Free MoE Router: Dynamically balances expert load without degrading model capacity.
+This module does not execute DeepSeek V3/R1, run a trained model, implement a
+production MLA kernel, or measure model quality/performance. It models storage and
+expert-selection ratios from explicit dimensions so those assumptions are testable.
 """
 
-from typing import List, Dict, Any, Tuple
-import math
-import time
+from __future__ import annotations
+
+from typing import Any
+
+EVIDENCE_STATE = "MODELED_MLA_MOE_SCENARIO_NOT_MODEL_EXECUTION"
+
 
 class DeepSeekMLAMoESentinel:
-    """Manages DeepSeek V3/R1 MLA low-rank latent compression and MoE expert load balancing."""
+    """Model latent KV storage and expert activation ratios from explicit inputs."""
 
-    def __init__(self, latent_dim: int = 512, hidden_dim: int = 7168, total_experts: int = 256):
+    def __init__(
+        self,
+        latent_dim: int = 512,
+        hidden_dim: int = 7168,
+        total_experts: int = 256,
+    ) -> None:
+        if latent_dim < 1 or hidden_dim < 1 or total_experts < 1:
+            raise ValueError("dimensions and expert count must be positive")
+        if latent_dim > hidden_dim:
+            raise ValueError("latent_dim must not exceed hidden_dim")
         self.latent_dim = latent_dim
         self.hidden_dim = hidden_dim
         self.total_experts = total_experts
 
-    def optimize_mla_moe(
-        self, tokens_count: int = 16384, active_experts: int = 8
-    ) -> Dict[str, Any]:
-        """
-        Compresses standard KV-cache into low-rank latent space and routes active MoE experts.
-        """
-        start_time = time.perf_counter()
+    def model_mla_moe(
+        self, tokens_count: int = 16_384, active_experts: int = 8
+    ) -> dict[str, Any]:
+        """Return modeled FP16 KV-storage and expert-activation ratios."""
 
-        raw_kv_bytes = tokens_count * self.hidden_dim * 2 * 2  # FP16 K+V
-        compressed_latent_bytes = tokens_count * self.latent_dim * 2  # Low-rank latent
+        if type(tokens_count) is not int or tokens_count < 1:
+            raise ValueError("tokens_count must be an integer >= 1")
+        if type(active_experts) is not int:
+            raise ValueError("active_experts must be an integer")
+        if active_experts < 1 or active_experts > self.total_experts:
+            raise ValueError("active_experts must be within total_experts")
 
-        memory_saved_pct = (1.0 - (compressed_latent_bytes / max(raw_kv_bytes, 1))) * 100.0
-        expert_utilization_pct = (active_experts / self.total_experts) * 100.0
-
-        elapsed_ms = (time.perf_counter() - start_time) * 1000.0
+        raw_kv_bytes = tokens_count * self.hidden_dim * 2 * 2  # FP16 K + V.
+        latent_bytes = tokens_count * self.latent_dim * 2  # One FP16 latent vector.
+        memory_saved_pct = (1.0 - latent_bytes / raw_kv_bytes) * 100.0
+        expert_utilization_pct = active_experts / self.total_experts * 100.0
 
         return {
             "tokens_count": tokens_count,
-            "raw_kv_mb": round(raw_kv_bytes / (1024 * 1024), 2),
-            "compressed_latent_mb": round(compressed_latent_bytes / (1024 * 1024), 2),
-            "memory_saved_percent": round(memory_saved_pct, 2),
+            "hidden_dim": self.hidden_dim,
+            "latent_dim": self.latent_dim,
+            "raw_kv_mb": round(raw_kv_bytes / (1024 * 1024), 4),
+            "modeled_latent_mb": round(latent_bytes / (1024 * 1024), 4),
+            "modeled_storage_reduction_percent": round(memory_saved_pct, 2),
             "active_experts": active_experts,
-            "expert_utilization_percent": round(expert_utilization_pct, 2),
-            "status": "MLA_MOE_OPTIMAL",
-            "answer": 42
+            "total_experts": self.total_experts,
+            "expert_activation_percent": round(expert_utilization_pct, 2),
+            "evidence_state": EVIDENCE_STATE,
         }
+
+    def optimize_mla_moe(
+        self, tokens_count: int = 16_384, active_experts: int = 8
+    ) -> dict[str, Any]:
+        """Compatibility alias for the historical public API."""
+
+        return self.model_mla_moe(tokens_count=tokens_count, active_experts=active_experts)
