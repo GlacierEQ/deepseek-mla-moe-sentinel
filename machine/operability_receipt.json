@@ -1,0 +1,32 @@
+{
+  "schema": "glaciereq.operability-receipt.v1",
+  "repository": "GlacierEQ/deepseek-mla-moe-sentinel",
+  "at": "2026-08-10T04:12Z",
+  "source_sha": "30fe02ee1ae35bf648020dc43d86745ef126114722f0f070eeace540285e25af",
+  "entry": "scripts/operate.py",
+  "primary_output": {
+    "module": "deepseek_mla_moe_sentinel",
+    "ok": true,
+    "repository": "GlacierEQ/deepseek-mla-moe-sentinel",
+    "smoke": {
+      "args": [],
+      "content_checked": true,
+      "invoked": true,
+      "kind": "class",
+      "method": "optimize_mla_moe",
+      "module_local": true,
+      "name": "DeepSeekMLAMoESentinel",
+      "result": {
+        "active_experts": 8,
+        "compressed_latent_mb": 16.0,
+        "expert_utilization_percent": 3.12,
+        "memory_saved_percent": 96.43,
+        "raw_kv_mb": 448.0,
+        "status": "MLA_MOE_OPTIMAL",
+        "tokens_count": 16384
+      }
+    }
+  },
+  "dual_run_ok": true,
+  "result": "PASS"
+}

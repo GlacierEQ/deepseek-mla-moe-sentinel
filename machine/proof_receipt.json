@@ -1,0 +1,31 @@
+{
+  "schema": "glaciereq.proof-receipt.v1",
+  "repository": "GlacierEQ/deepseek-mla-moe-sentinel",
+  "source_sha": "30fe02ee1ae35bf648020dc43d86745ef126114722f0f070eeace540285e25af",
+  "proof_id": "elite-deepseek-mla-moe-sentinel-1786335149",
+  "environment": {
+    "python": "/Users/kcbflux/job-app/excellence/.venv-elite/bin/python",
+    "PYTHONPATH": "/Users/kcbflux/job-app/repos/deepseek-mla-moe-sentinel:/Users/kcbflux/job-app/repos/deepseek-mla-moe-sentinel/src",
+    "entry": "unittest"
+  },
+  "tests": [
+    "/Users/kcbflux/job-app/excellence/.venv-elite/bin/python -m unittest discover -s tests -v (x2)"
+  ],
+  "adversarial_tests": [
+    "tests/test_adversarial.py"
+  ],
+  "runtime": {
+    "operate": "scripts/operate.py (x2)",
+    "dual_run_ok": true,
+    "proof_dual_run_ok": true
+  },
+  "result": "PASS",
+  "limitations": [
+    "not production deployed",
+    "reference implementation only"
+  ],
+  "timestamp": "2026-08-10T04:12Z",
+  "artifact_hashes": {
+    "operability_receipt": "b3145a73bcab67b9491b72d8e3a0fa795c5c0ad566b0c2c94cfccce46dbc287e"
+  }
+}

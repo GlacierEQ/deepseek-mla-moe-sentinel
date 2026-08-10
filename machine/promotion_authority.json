@@ -1,0 +1,11 @@
+{
+  "schema": "glaciereq.promotion-authority-grant.v1",
+  "repository": "GlacierEQ/deepseek-mla-moe-sentinel",
+  "source_sha": "30fe02ee1ae35bf648020dc43d86745ef126114722f0f070eeace540285e25af",
+  "proof_receipt_digest": "9550842b54129da3b943e9dd90e60bc7b47d72c5d11621b185f7810aa6d5ff4f",
+  "not_after": 1788927149.234226,
+  "mac": "5be8a5dcf93d7732ac7ad6888a382b3b60367bab256e58b71023caa6644dbaf2",
+  "issuer": "local_operator_promotion_authority",
+  "verified": true,
+  "secret_ref": "src/promotion_authority.py::LOCAL_OPERATOR_SECRET"
+}
