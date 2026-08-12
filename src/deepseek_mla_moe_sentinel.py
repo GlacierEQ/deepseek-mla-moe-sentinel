@@ -54,7 +54,6 @@ class DeepSeekMLAMoESentinel:
             "modeled_latent_mb": round(latent_bytes / (1024 * 1024), 4),
             "modeled_storage_reduction_percent": round(memory_saved_pct, 2),
             "active_experts": active_experts,
-<<<<<<< HEAD
             "total_experts": self.total_experts,
             "expert_activation_percent": round(expert_utilization_pct, 2),
             "evidence_state": EVIDENCE_STATE,
@@ -66,8 +65,3 @@ class DeepSeekMLAMoESentinel:
         """Compatibility alias for the historical public API."""
 
         return self.model_mla_moe(tokens_count=tokens_count, active_experts=active_experts)
-=======
-            "expert_utilization_percent": round(expert_utilization_pct, 2),
-            "status": "MLA_MOE_OPTIMAL"
-            }
->>>>>>> 00d238b (chore: Hyper Excellence Activation & structural matrix alignment)
