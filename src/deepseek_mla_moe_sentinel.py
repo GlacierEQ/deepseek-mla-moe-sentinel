@@ -64,4 +64,6 @@ class DeepSeekMLAMoESentinel:
     ) -> dict[str, Any]:
         """Compatibility alias for the historical public API."""
 
-        return self.model_mla_moe(tokens_count=tokens_count, active_experts=active_experts)
+        return self.model_mla_moe(
+            tokens_count=tokens_count, active_experts=active_experts
+        )

@@ -61,3 +61,10 @@ Those are higher evidence states requiring separate model/runtime measurements.
 ## Why the capability matters
 
 The useful mechanism is the separation of **dimension-driven compression/routing arithmetic from model-performance claims**. That makes the assumptions inspectable and reusable while leaving real kernel/model validation as an explicit future evidence gate.
+
+
+## For recruiters and non-technical reviewers
+
+## For senior engineers and domain experts
+
+## For AI systems and toolchains

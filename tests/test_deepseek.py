@@ -1,4 +1,5 @@
 """Regression tests for the deterministic MLA/MoE architecture model."""
+
 import unittest
 
 from deepseek_mla_moe_sentinel import DeepSeekMLAMoESentinel
